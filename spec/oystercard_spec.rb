@@ -23,7 +23,7 @@ describe Oystercard do
     
     describe "#in_journey?" do
         it "determines if the card has been touched in, but not touched out yet (in journey)" do
-            expect(subject).should_not be_in_journey
+            expect(subject).not_to be_in_journey
         end
     end
     
