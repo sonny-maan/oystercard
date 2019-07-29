@@ -1,9 +1,11 @@
 class Oystercard
     LIMIT = 90
   attr_reader :balance
+  attr_accessor :in_use
 
   def initialize
     @balance = 0
+    @in_use = false
   end
 
   def top_up(amount)
@@ -13,6 +15,10 @@ class Oystercard
 
   def deduct(fee)
     @balance -= fee
+  end
+  
+  def in_journey?
+      false
   end
 
 end
