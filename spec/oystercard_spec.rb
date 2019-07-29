@@ -1,6 +1,5 @@
 require 'oystercard'
 
-# expect{Counter.increment}.to change{Counter.count}.by(2)
 
 describe Oystercard do
     describe "#balance" do
@@ -8,15 +7,17 @@ describe Oystercard do
     end
 
     describe '#top_up' do
-        
+
       it 'can be top up' do
         expect{subject.top_up 10}.to change{subject.balance}.by(10)
       end
-      
-  it 'raises an error when limit reached' do
-    subject.top_up(Oystercard::LIMIT)
-    expect{ subject.top_up (55)}.to raise_error("Maximum limit of £#{Oystercard::LIMIT} reached")
-  end
+
     end
-    
+
+
+    describe "#deduct" do
+     it 'charge for the trip' do
+      expect{subject.deduct 2}.to change{subject.balance}.by (-2)
+     end
+    end
 end

@@ -11,4 +11,8 @@ class Oystercard
     @balance += amount
   end
 
+  def deduct(fee)
+    @balance -= fee
+  end
+
 end
