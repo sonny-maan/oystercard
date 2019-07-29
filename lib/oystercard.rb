@@ -20,5 +20,9 @@ class Oystercard
   def in_journey?
       @in_use
   end
+  
+  def touch_in
+      @in_use = true
+  end
 
 end

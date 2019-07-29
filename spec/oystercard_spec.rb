@@ -27,4 +27,12 @@ describe Oystercard do
         end
     end
     
+    context "in journey" 
+    describe "#touch_in" do
+        it "changes @in_use to true indicate the card is now on a journey" do
+            subject.touch_in
+            expect(subject).to be_in_journey
+        end
+    end
+    
 end
