@@ -20,19 +20,26 @@ describe Oystercard do
       expect{subject.deduct 2}.to change{subject.balance}.by (-2)
      end
     end
-    
+
     describe "#in_journey?" do
         it "determines if the card has been touched in, but not touched out yet (in journey)" do
             expect(subject).not_to be_in_journey
         end
     end
-    
-    context "in journey" 
+
+    context "in journey"
     describe "#touch_in" do
         it "changes @in_use to true indicate the card is now on a journey" do
             subject.touch_in
             expect(subject).to be_in_journey
         end
     end
-    
+
+    describe "#touch_out" do
+        it "changes @in_use to true indicate the card is now on a journey" do
+            subject.touch_out
+            expect(subject).not_to be_in_journey
+        end
+    end
+
 end
