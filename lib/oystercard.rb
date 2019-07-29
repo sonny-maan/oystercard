@@ -18,7 +18,7 @@ class Oystercard
   end
   
   def in_journey?
-      false
+      @in_use
   end
 
 end
