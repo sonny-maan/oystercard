@@ -1,5 +1,6 @@
 class Oystercard
-    LIMIT = 90
+    MAX_BALANCE = 90
+    MIN_BALANCE = 1
   attr_reader :balance
   attr_accessor :in_use
 
@@ -9,7 +10,7 @@ class Oystercard
   end
 
   def top_up(amount)
-      fail "Maximum limit of £#{LIMIT} reached" if (@balance + amount) > LIMIT
+      fail "Maximum limit of £#{MAX_BALANCE} reached" if (@balance + amount) > MAX_BALANCE
     @balance += amount
   end
 
