@@ -3,6 +3,7 @@
 class Oystercard
   MAX_BALANCE = 90
   MIN_BALANCE = 1
+  MIN_JOURNEY_COST = 5
   attr_reader :balance
   attr_accessor :in_use
 
@@ -33,6 +34,7 @@ class Oystercard
 
   def touch_out
     @in_use = false
+    
   end
 
   private
