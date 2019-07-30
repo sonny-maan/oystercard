@@ -4,6 +4,7 @@ class Oystercard
   MAX_BALANCE = 90
   MIN_BALANCE = 1
   MIN_JOURNEY_COST = 5
+  
   attr_reader :balance
   attr_accessor :in_use
 
@@ -28,13 +29,12 @@ class Oystercard
 
   def touch_in
     raise 'Error, balance is lower than minimum' if balance < MIN_BALANCE
-
     @in_use = true
   end
 
   def touch_out
+    deduct(MIN_JOURNEY_COST)
     @in_use = false
-    
   end
 
   private
