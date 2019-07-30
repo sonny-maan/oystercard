@@ -23,7 +23,8 @@ class Oystercard
   end
 
   def touch_in
-      @in_use = true
+    fail "Error, balance is lower than minimum" if balance < MIN_BALANCE
+    @in_use = true
   end
 
   def touch_out
