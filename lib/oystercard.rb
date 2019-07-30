@@ -19,10 +19,6 @@ class Oystercard
     @balance += amount
   end
 
-  def deduct(fee)
-    @balance -= fee
-  end
-
   def in_journey?
     @in_use
   end
@@ -42,4 +38,9 @@ class Oystercard
   def max_bal?(amount)
     (@balance + amount) > MAX_BALANCE
   end
+  
+  def deduct(fee)
+    @balance -= fee
+  end
+  
 end
