@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Oystercard
-    MAX_BALANCE = 90
-    MIN_BALANCE = 1
+  MAX_BALANCE = 90
+  MIN_BALANCE = 1
   attr_reader :balance
   attr_accessor :in_use
 
@@ -10,7 +12,8 @@ class Oystercard
   end
 
   def top_up(amount)
-      fail "Maximum limit of £#{MAX_BALANCE} reached" if (@balance + amount) > MAX_BALANCE
+    raise "Maximum limit of £#{MAX_BALANCE} reached" if max_bal?(amount)
+
     @balance += amount
   end
 
@@ -19,11 +22,12 @@ class Oystercard
   end
 
   def in_journey?
-      @in_use
+    @in_use
   end
 
   def touch_in
-    fail "Error, balance is lower than minimum" if balance < MIN_BALANCE
+    raise 'Error, balance is lower than minimum' if balance < MIN_BALANCE
+
     @in_use = true
   end
 
@@ -31,4 +35,9 @@ class Oystercard
     @in_use = false
   end
 
+  private
+
+  def max_bal?(amount)
+    (@balance + amount) > MAX_BALANCE
+  end
 end
