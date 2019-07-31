@@ -25,13 +25,20 @@ describe Oystercard do
   end
 
   describe ' #touch_in' do
+    let (:station) { double :station }
+    it 'stores an entry station' do
+      allow(subject).to receive(:balance) { 5 }
+      subject.touch_in(station)
+      expect(subject.entry_station).to eq station
+    end
+
     it 'can occur' do
       subject.top_up(5)
-      subject.touch_in
+      subject.touch_in(station)
       expect(subject).to be_in_journey
     end
     it 'will not touch in if below minimum balance' do
-      expect { subject.touch_in }.to raise_error 'Error, balance is lower than minimum'
+      expect { subject.touch_in(station) }.to raise_error 'Error, balance is lower than minimum'
     end
   end
 
@@ -40,10 +47,10 @@ describe Oystercard do
       subject.touch_out
       expect(subject).not_to be_in_journey
     end
-    
+
     it 'deduct minimun jorney cost from balance when touch out' do
       subject.touch_out
-      expect{subject.touch_out}.to change{subject.balance}.by(-Oystercard::MIN_JOURNEY_COST)
+      expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MIN_JOURNEY_COST)
     end
   end
 end
