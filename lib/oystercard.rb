@@ -5,13 +5,13 @@ class Oystercard
   MIN_BALANCE = 1
   MIN_JOURNEY_COST = 5
 
-  attr_reader :balance, :entry_station, :journeys, :exit_station
+  attr_reader :balance, :journeys, :in_journeys
 
   def initialize
     @balance = 0
-    @entry_station = nil
     @journeys = {}
-    @exit_station = nil
+    @in_journey = false
+    ##remember to initialize your start and end stations as nil
   end
 
   def top_up(amount)
@@ -21,21 +21,21 @@ class Oystercard
   end
 
   def in_journey?
-    entry_station
+    @in_journey
   end
 
-  def touch_in(entry_station)
+  def touch_in(station)
     raise 'Error, balance is lower than minimum' if balance < MIN_BALANCE
-    @exit_station = nil
-    @entry_station = entry_station
-    @journeys.store(:entry_station, entry_station)
-  end
+    ##remember when you touch in you want to reset your exit station to nil for the next journey (reset to start fresh on new journey)
+    @journeys.store(:entry_station, station)
+    @in_journey = true
+  end 
 
-  def touch_out(exit_station)
+  def touch_out(station)
     deduct(MIN_JOURNEY_COST)
-    @exit_station = exit_station
-    @journeys.store(:exit_station, exit_station)
-    @entry_station = nil
+    @journeys.store(:exit_station, station)
+    ##remember when you touch out you want to reset your entry station to nil for the next journey (reset to start fresh on new journey)
+    @in_journey = false
   end
 
   private
